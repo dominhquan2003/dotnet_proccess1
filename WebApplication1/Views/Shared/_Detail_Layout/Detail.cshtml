@@ -1,0 +1,217 @@
+﻿@{
+    ViewData["Title"] = "Detail";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - WebApplication1</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/WebApplication1.styles.css" asp-append-version="true" />
+	<style>
+		a{
+			text-decoration: none;
+			color:black;
+		}
+
+		a:active{
+			color:black;
+		}
+
+		body{
+			margin: 0;
+		}
+
+		li > a:hover{
+			text-decoration: underline;
+			color:red;
+		}
+
+		ul{
+			list-style:none;
+			padding:0;
+		}
+
+		li {
+			display:flex;
+		}
+
+		img{
+			max-width: 100%;
+		}
+
+		.footer-content .list-info p{
+			font-size:14px;
+		}
+
+		.footer-title h4{
+			font-size:16px;
+		}
+
+		.list-ship li, .list-pay li {
+			width: calc(100%/4);
+			display: inline-flex;
+			padding: 2px;
+			color: black;
+		}
+
+	</style>
+</head>
+<body>
+    @* Header *@
+    <header class="p-3 bg-white ">
+        <div class="container">
+            <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+
+                <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 font-weight-bold text-decoration-none" style="font-size:32px">
+                    DotnetShop
+                </a>
+
+                <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+                    <li><a href="#" class="nav-link px-2 text-secondary"></a></li>
+                    <li><a href="#" class="nav-link px-2 text-white"></a></li>
+                    <li><a href="#" class="nav-link px-2 text-white"></a></li>
+                    <li><a href="#" class="nav-link px-2 text-white"></a></li>
+                    <li><a href="#" class="nav-link px-2 text-white"></a></li>
+                </ul>
+
+                <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
+                    <input type="search" class="form-control form-control-dark" placeholder="Search..." aria-label="Search">
+                </form>
+
+				@{
+
+					if (ViewData["Name"] != null)
+					{
+						<div class="text-end" style="display: flex; align-items: center; justify-content: center;">
+							<a asp-controller="Cart" asp-action="Index" class="text-decoration-none text-black" style="margin-right: 5px; border:1px solid black; border-radius:4px; padding: 3px 12px">Cart</a>
+							<div>Welcome, @ViewData["Name"] </div>
+							<a asp-controller="Login" asp-action="Logout" style="margin-left:5px">Log out</a>
+						</div>
+					}
+					else
+					{
+						<div class="text-end">
+							<a asp-controller="Login" asp-action="Index" class="text-decoration-none btn">Login</a>
+							<a href="/Register" class="text-decoration-none text-black btn">Register</a>
+						</div>
+					}
+				}
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    @* viewed products *@
+    <div class="container" style="height: 250px;margin-bottom: 100px;">
+		<h4 style="font-size: 24px; padding: 10px 0; border:1px solid #ccc">
+			Viewed products
+		</h4>
+		<div class="row">
+
+		</div>
+    </div>
+
+	<footer class="main-footer container">
+		<div class="main-footer--top">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-sm-12 col-md-6 col-lg-2 col-lg">
+						<div class="footer-col footer-link toggle-footer toggle-first">
+							<div class="footer-title">
+								<h4>Về chúng tôi</h4>
+								<span class="icon-title"></span>
+							</div>
+							<div class="footer-content">
+								<ul>
+									<li class="item"><a href="#" title="Giới thiệu">Giới thiệu</a></li>
+									<li class="item"><a href="#" title="Tuyển dụng">Tuyển dụng</a></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+					<div class="col-sm-12 col-md-6 col-lg-2 col-lg">
+						<div class="footer-col footer-link toggle-footer">
+							<div class="footer-title">
+								<h4>Chính sách </h4>
+								<span class="icon-title"></span>
+							</div>
+							<div class="footer-content">
+								<ul>
+									<li class="item"><a href="#" title="Chính sách bảo hành">Chính sách bảo hành</a></li>
+									<li class="item"><a href="#" title="Chính sách thanh toán">Chính sách thanh toán</a></li>
+									<li class="item"><a href="#" title="Chính sách giao hàng">Chính sách giao hàng</a></li>
+									<li class="item"><a href="#" title="Chính sách bảo mật">Chính sách bảo mật</a></li>
+
+								</ul>
+							</div>
+						</div>
+					</div>
+					<div class="col-sm-12 col-md-6 col-lg-2 col-lg">
+						<div class="footer-col footer-link toggle-footer">
+							<div class="footer-title">
+								<h4>Thông tin </h4>
+								<span class="icon-title"></span>
+							</div>
+							<div class="footer-content">
+								<ul>
+									<li class="item"><a href="" title="Hệ thống cửa hàng">Hệ thống cửa hàng</a></li>
+									<li class="item"><a href="" title="Trung tâm bảo hành">Trung tâm bảo hành</a></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+					<div class="col-sm-12 col-md-6 col-lg-3 col-lg">
+						<div class="footer-col footer-block toggle-footer">
+							<div class="footer-title"><h4>TỔNG ĐÀI HỖ TRỢ <span>(Miễn phí gọi)</span></h4></div>
+							<div class="footer-content">
+								<div class="list-info">
+									<p><span>Gọi mua: </span> <a href="tel:0813041374">0813041374 <span> (8:00 - 21:00) </span> </a></p>
+									<p><span>CSKH: </span> <a href="tel:0813041374">0813041374<span> (8:00 - 21:00) </span> </a></p>
+									<p><span>Email: </span> <a href="#">nguyenphong22803@gmail.com</a></p>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-sm-12 col-md-6 col-lg-3 col-lg">
+						<div class="footer-col footer-block toggle-footer">
+							<div class="footer-title"><h4>Đơn vị vận chuyển</h4></div>
+							<div class="footer-content">
+								<ul class="list-ship">
+									<li><img data-sizes="auto" class="lazyautosizes lazyloaded" src="//theme.hstatic.net/200000722513/1001090675/14/ship_1.png?v=1782" data-src="//theme.hstatic.net/200000722513/1001090675/14/ship_1.png?v=1782" alt="Hình thức vận chuyển 1" sizes="106px"></li>
+									<li><img data-sizes="auto" class="lazyautosizes lazyloaded" src="//theme.hstatic.net/200000722513/1001090675/14/ship_2.png?v=1782" data-src="//theme.hstatic.net/200000722513/1001090675/14/ship_2.png?v=1782" alt="Hình thức vận chuyển 2" sizes="106px"></li>
+									<li><img data-sizes="auto" class="lazyautosizes lazyloaded" src="//theme.hstatic.net/200000722513/1001090675/14/ship_3.png?v=1782" data-src="//theme.hstatic.net/200000722513/1001090675/14/ship_3.png?v=1782" alt="Hình thức vận chuyển 3" sizes="106px"></li>
+									<li><img data-sizes="auto" class="lazyautosizes lazyloaded" src="//theme.hstatic.net/200000722513/1001090675/14/ship_4.png?v=1782" data-src="//theme.hstatic.net/200000722513/1001090675/14/ship_4.png?v=1782" alt="Hình thức vận chuyển 4" sizes="106px"></li>
+								</ul>
+							</div>
+						</div>
+						<div class="footer-col footer-block toggle-footer">
+							<div class="footer-title"><h4>Cách thức thanh toán</h4></div>
+							<div class="footer-content">
+								<ul class="list-pay">
+									<li><img data-sizes="auto" class="lazyautosizes lazyloaded" src="//theme.hstatic.net/200000722513/1001090675/14/pay_1.png?v=1782" data-src="//theme.hstatic.net/200000722513/1001090675/14/pay_1.png?v=1782" alt="Phương thức thanh toán 1" sizes="106px"></li>
+									<li><img data-sizes="auto" class="lazyautosizes lazyloaded" src="//theme.hstatic.net/200000722513/1001090675/14/pay_2.png?v=1782" data-src="//theme.hstatic.net/200000722513/1001090675/14/pay_2.png?v=1782" alt="Phương thức thanh toán 2" sizes="106px"></li>
+									<li><img data-sizes="auto" class="lazyautosizes lazyloaded" src="//theme.hstatic.net/200000722513/1001090675/14/pay_3.png?v=1782" data-src="//theme.hstatic.net/200000722513/1001090675/14/pay_3.png?v=1782" alt="Phương thức thanh toán 3" sizes="106px"></li>
+									<li><img data-sizes="auto" class="lazyautosizes lazyloaded" src="//theme.hstatic.net/200000722513/1001090675/14/pay_4.png?v=1782" data-src="//theme.hstatic.net/200000722513/1001090675/14/pay_4.png?v=1782" alt="Phương thức thanh toán 4" sizes="106px"></li>
+									<li><img data-sizes="auto" class="lazyautosizes lazyloaded" src="//theme.hstatic.net/200000722513/1001090675/14/pay_5.png?v=1782" data-src="//theme.hstatic.net/200000722513/1001090675/14/pay_5.png?v=1782" alt="Phương thức thanh toán 5" sizes="106px"></li>
+									<li><img data-sizes="auto" class="lazyautosizes lazyloaded" src="//theme.hstatic.net/200000722513/1001090675/14/pay_6.png?v=1782" data-src="//theme.hstatic.net/200000722513/1001090675/14/pay_6.png?v=1782" alt="Phương thức thanh toán 6" sizes="106px"></li>
+									<li><img data-sizes="auto" class="lazyautosizes lazyloaded" src="//theme.hstatic.net/200000722513/1001090675/14/pay_7.png?v=1782" data-src="//theme.hstatic.net/200000722513/1001090675/14/pay_7.png?v=1782" alt="Phương thức thanh toán 7" sizes="106px"></li>
+									<li><img data-sizes="auto" class="lazyautosizes lazyloaded" src="//theme.hstatic.net/200000722513/1001090675/14/pay_8.png?v=1782" data-src="//theme.hstatic.net/200000722513/1001090675/14/pay_8.png?v=1782" alt="Phương thức thanh toán 8" sizes="106px"></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</footer>
+</body>
+</html>

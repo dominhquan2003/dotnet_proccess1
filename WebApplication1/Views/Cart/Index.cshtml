@@ -1,0 +1,103 @@
+﻿@{
+	ViewData["Title"] = "Cart";
+	Layout = "~/Views/Shared/_Cart_Layout/_Cart_Layout.cshtml";
+}
+
+@{
+	if (ViewBag.Message != null)
+	{
+		<div class="text-center">
+			<p class="text-primary">@ViewBag.Message</p>
+		</div>
+	}
+	else
+	{
+		<div class="shopping-cart section">
+			<div class="container">
+				<div class="row">
+					<div class="col-12">
+						<!-- Shopping Summery -->
+						<table class="table shopping-summery">
+							<thead>
+								<tr class="main-hading">
+									<th class="text-center">PRODUCT</th>
+									<th class="text-center">NAME</th>
+									<th class="text-center">UNIT PRICE</th>
+									<th class="text-center">QUANTITY</th>
+									<th class="text-center">TOTAL</th>
+									<th class="text-center">ACTION</th>
+								</tr>
+							</thead>
+							<tbody data-cartid="@ViewBag.CartId">
+								@{
+									var products = ViewBag.ListProduct;
+									if (products != null)
+									{
+										foreach (var c in products)
+										{
+											<tr>
+												<td class="image text-center" data-title="No"><img src="https://via.placeholder.com/100x100" alt="#" /></td>
+												<td class="product-des" data-title="Description">
+													<p class="product-name"><a href="/Product/@c.Product.Id">@c.Product.Name</a></p>
+													<p class="product-des">@c.Product.Description</p>
+												</td>
+												<td class="price text-center" data-title="Price"><span>@c.Product.Price.ToString("N0") đ</span></td>
+												<td class="qty" data-title="Qty">
+													<div class="input-group" style="display:flex;align-items:center;justify-content:center;">
+														<div class="button minus">
+															<button type="button" class="btn btn-primary btn-number" data-type="minus" data-field="quant[1]">
+																&minus;
+															</button>
+														</div>
+														<input type="text" name="quant[1]" class="input-number" data-min="1" data-max="100" data-productid="@c.Product.Id" value="@c.Quantity">
+														<div class="button plus">
+															<button type="button" class="btn btn-primary btn-number" data-type="plus" data-field="quant[1]">
+																&plus;
+															</button>
+														</div>
+													</div>
+												</td>
+												<td class="total-amount text-center" data-title="Total"><span>@((c.Product.Price * c.Quantity).ToString("N0")) đ</span></td>
+												<td class="action text-center" data-title="Remove"><a href="/cart/delete?cartId=@ViewBag.CartId&productId=@c.Product.Id">Xoá</a></td>
+											</tr>
+										}
+									}
+								}
+							</tbody>
+						</table>
+						<!--/ End Shopping Summery -->
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-12">
+						<!-- Total Amount -->
+						<div class="total-amount">
+							<div class="row">
+								<div class="col-lg-12 col-md-7 col-12">
+									<div class="right">
+										<ul>
+											<li>Cart Subtotal: <span>@ViewBag.ToTal.ToString("N0") đ</span></li>
+											<li>Shipping:<span> Free</span></li>
+										</ul>
+										<div class="button5">
+											<a href="/order/payment?cartId=@ViewBag.CartId&total=@ViewBag.ToTal.ToString("F0")" class="btn btn-success">Checkout</a>
+											<a href="/" class="btn btn-primary">Continue shopping</a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!--/ End Total Amount -->
+					</div>
+				</div>
+			</div>
+		</div>
+	}
+}
+
+
+
+
+
+
+

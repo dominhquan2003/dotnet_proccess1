@@ -1,0 +1,124 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="container mt-5">
+    <div class="row">
+        <!-- Sidebar with Filters (on the left) -->
+        <div class="col-md-3">
+            <div class="card">
+                <div class="card-body">
+                    <!-- Price Range Filter -->
+                    <h6>Price Range:</h6>
+                    <div class="mb-3">
+                        <input type="range" value="0" class="form-range" id="priceRange" min="0" max="1000" step="10">
+                        <div class="d-flex justify-content-between">
+                            <label for="priceRange" class="form-label form-label-sm">0đ</label>
+                            <label for="priceRange" class="form-label form-label-sm">@(99999999.ToString("N0"))đ</label>
+                        </div>
+                    </div>
+                    <!-- Category Filter -->
+                    <h6>Category:</h6>
+                    @{
+                        if (ViewBag.Categories != null)
+                        {
+                            foreach (var x in ViewBag.Categories)
+                            {
+                                <div class="form-check">
+                                    <input data-id="@x.Id" name="category" type="checkbox" class="form-check-input category-option" id="categoryOption_@x.Id">
+                                    <label class="form-check-label" for="categoryOption_@x.Id">@(char.ToUpper(x.Name[0]) + x.Name.Substring(1).ToLower())</label>
+                                </div>
+                            }
+                        }
+                    }
+                    <!-- Add more filter options as needed -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content (product listings) -->
+        <div id="main-content" class="col-md-9">
+            <!-- Sorting (at the top) -->
+            <div class="d-flex mb-3">
+                <a id="sortDesc" data-value="desc" class="d-flex mx-2 justify-content-center align-items-center fit-content-with-padding">
+                    <span class="icon">
+                        <svg height="15" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
+                            <path d="M416 288h-95.1c-17.67 0-32 14.33-32 32s14.33 32 32 32H416c17.67 0 32-14.33 32-32S433.7 288 416 288zM544 32h-223.1c-17.67 0-32 14.33-32 32s14.33 32 32 32H544c17.67 0 32-14.33 32-32S561.7 32 544 32zM352 416h-32c-17.67 0-32 14.33-32 32s14.33 32 32 32h32c17.67 0 31.1-14.33 31.1-32S369.7 416 352 416zM480 160h-159.1c-17.67 0-32 14.33-32 32s14.33 32 32 32H480c17.67 0 32-14.33 32-32S497.7 160 480 160zM192.4 330.7L160 366.1V64.03C160 46.33 145.7 32 128 32S96 46.33 96 64.03v302L63.6 330.7c-6.312-6.883-14.94-10.38-23.61-10.38c-7.719 0-15.47 2.781-21.61 8.414c-13.03 11.95-13.9 32.22-1.969 45.27l87.1 96.09c12.12 13.26 35.06 13.26 47.19 0l87.1-96.09c11.94-13.05 11.06-33.31-1.969-45.27C224.6 316.8 204.4 317.7 192.4 330.7z"></path>
+                        </svg>
+                    </span>
+                    <span>Giá Cao - Thấp</span>
+                </a>
+                <a id="sortAsc" data-value="asc" href="/filter?sort=asc" class="d-flex mx-2 justify-content-center align-items-center fit-content-with-padding">
+                    <div class="icon">
+                        <svg height="15" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
+                            <path d="M320 224H416c17.67 0 32-14.33 32-32s-14.33-32-32-32h-95.1c-17.67 0-32 14.33-32 32S302.3 224 320 224zM320 352H480c17.67 0 32-14.33 32-32s-14.33-32-32-32h-159.1c-17.67 0-32 14.33-32 32S302.3 352 320 352zM320 96h32c17.67 0 31.1-14.33 31.1-32s-14.33-32-31.1-32h-32c-17.67 0-32 14.33-32 32S302.3 96 320 96zM544 416h-223.1c-17.67 0-32 14.33-32 32s14.33 32 32 32H544c17.67 0 32-14.33 32-32S561.7 416 544 416zM192.4 330.7L160 366.1V64.03C160 46.33 145.7 32 128 32S96 46.33 96 64.03v302L63.6 330.7c-6.312-6.883-14.94-10.38-23.61-10.38c-7.719 0-15.47 2.781-21.61 8.414c-13.03 11.95-13.9 32.22-1.969 45.27l87.1 96.09c12.12 13.26 35.06 13.26 47.19 0l87.1-96.09c11.94-13.05 11.06-33.31-1.969-45.27C224.6 316.8 204.4 317.7 192.4 330.7z"></path>
+                        </svg>
+                    </div>
+                    <span>Giá Thấp - Cao</span>
+                </a>
+            </div>
+            <!-- Product Listings -->
+            <div id="productListings" class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4">
+                @{
+                    if (ViewBag.Products != null)
+                    {
+                        foreach (var p in ViewBag.Products)
+                        {
+                            <div class="col-4 mb-5">
+                                <div class="card h-100">
+                                    <!-- Product image-->
+                                    <img class="card-img-top" src="https://product.hstatic.net/200000722513/product/lg-gram-style-fix_4013ad0ecc9c449f9611fb4f31069a92_grande.png" alt="..." />
+                                    <!-- Product details-->
+                                    <div class="card-body">
+                                        <div class="">
+                                            <!-- Product name-->
+                                            <h5 class="fw-bolder">
+                                                <a href="/Product/@p.Id" class="text-decoration-none">@p.Name</a>
+                                            </h5>
+                                            <!-- Product price-->
+                                            <span style="font-size:20px; color:red; font-weight:bold;">@p.Price.ToString("N0") đ</span>
+                                        </div>
+                                    </div>
+                                    <div class="proloop-rating" style="padding:5px 16px 10px ;display: flex; align-items: center; font-size: 12px;">
+                                        <span style="color: #FF8A00; font-weight: 600">0.0</span>
+                                        <span class="icon">
+                                            <svg viewBox="0 0 12 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M2.09627 11.6195L2.82735 8.16864L0.268563 5.80414C0.268563 5.80414 -0.096986 5.48462 0.0248693 5.03728C0.146725 4.58994 0.634105 4.58994 0.634105 4.58994L4.04582 4.27041L5.38614 1.01124C5.38614 1.01124 5.5689 0.5 5.99538 0.5C6.42185 0.5 6.60461 1.01124 6.60461 1.01124L7.94493 4.27041L11.4785 4.58994C11.4785 4.58994 11.844 4.65385 11.9659 5.03728C12.0877 5.42071 11.844 5.67633 11.844 5.67633L9.1634 8.16864L9.89448 11.7473C9.89448 11.7473 10.0163 12.1308 9.71171 12.3864C9.40709 12.642 8.91971 12.3864 8.91971 12.3864L5.99538 10.5331L3.13197 12.3864C3.13197 12.3864 2.70551 12.642 2.33996 12.3864C1.97442 12.1308 2.09627 11.6195 2.09627 11.6195Z" fill="#FF8A00"></path>
+                                            </svg>
+                                        </span>
+                                        <span class="count">(0 đánh giá)</span>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    }
+                }
+            </div>
+            <div class="text-center">
+                <ul class="pagination">
+                    <li class="page-item">
+                        <a class="page-link" href="#" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                    @{
+                        if (ViewBag.Page != null)
+                        {
+                            for (int i = 1; i <= ViewBag.Page; i++)
+                            {
+                                <li class="page-item"><a class="page-link" href="#" data-page="1">@i</a></li>
+                            }
+                        }
+                    }
+                    <li class="page-item">
+                        <a class="page-link" href="#" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+

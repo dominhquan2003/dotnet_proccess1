@@ -1,0 +1,190 @@
+﻿@{
+	// Layout = "~/Views/Shared/_Detail_Layout/Detail.cshtml";
+	var product = ViewBag.ProductDetail;
+	var cartId = ViewBag.CartId;
+}
+
+<div class="detail-product" style="margin-bottom:20px;">
+    <div class="product-header" style="margin: 20px 0;">
+        <a href="/">Trang chủ</a> /
+        <a href="/">@product.Category.Name</a> /
+        <span>@product.Name</span>
+    </div>
+    <div class="product-body">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6" style="display: flex;align-items: center; justify-content: center;">
+					@* begin *@
+					<div class="col-lg-5 col-md-12 col-12 product-gallery">
+						<div class="product-gallery--inner sticky-gallery">
+							<div class="product-gallery--slide swiper swiper-initialized swiper-horizontal swiper-pointer-events swiper-backface-hidden" id="slideProduct">
+								<div class="swiper-wrapper" id="swiper-wrapper-6f94f91a3b58bd1f" aria-live="polite">
+									<div class="product-gallery--photo swiper-slide swiper-slide-active" data-image="//product.hstatic.net/200000722513/product/kn039-038w_1f813f55348341e7a0a257e1d7f2128b_1024x1024.png" style="width: 372px;" role="group" aria-label=" / ">
+										<div class="product-gallery--item boxlazy-img">
+											<div class="boxlazy-img--insert lazy-img--prod">
+												<a data-fancybox="gallery" class="boxlazy-img--aspect" href="//product.hstatic.net/200000722513/product/kn039-038w_1f813f55348341e7a0a257e1d7f2128b_1024x1024.png">
+													<img src="//product.hstatic.net/200000722513/product/kn039-038w_1f813f55348341e7a0a257e1d7f2128b_grande.png" class="gallery-demo swiper-lazy" alt=" Laptop Asus ZenBook Flip OLED UP3404VA KN038W ">
+												</a>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						</div>
+					</div>
+					@* end *@
+                    <div class="col-md-6">
+                        @if (product != null)
+                        {
+							<div class="product-name"><h1>@product.Name</h1></div>
+							<div class="product-rating" style="display: flex; align-items: center; font-size: 16px;">
+								<span style="color: #FF8A00; font-weight: 600;">0</span>
+								<span style="display: inline-flex;">
+									<svg style="height: 12px; width: 12px;" viewBox="0 0 12 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+											<path d="M2.09627 11.6195L2.82735 8.16864L0.268563 5.80414C0.268563 5.80414 -0.096986 5.48462 0.0248693 5.03728C0.146725 4.58994 0.634105 4.58994 0.634105 4.58994L4.04582 4.27041L5.38614 1.01124C5.38614 1.01124 5.5689 0.5 5.99538 0.5C6.42185 0.5 6.60461 1.01124 6.60461 1.01124L7.94493 4.27041L11.4785 4.58994C11.4785 4.58994 11.844 4.65385 11.9659 5.03728C12.0877 5.42071 11.844 5.67633 11.844 5.67633L9.1634 8.16864L9.89448 11.7473C9.89448 11.7473 10.0163 12.1308 9.71171 12.3864C9.40709 12.642 8.91971 12.3864 8.91971 12.3864L5.99538 10.5331L3.13197 12.3864C3.13197 12.3864 2.70551 12.642 2.33996 12.3864C1.97442 12.1308 2.09627 11.6195 2.09627 11.6195Z" fill="#FF8A00"></path>
+									</svg>
+								</span>
+								<a href="#" style="display: inline-flex;">Xem đánh giá</a>
+							</div>
+
+						<div class="info-bottom">
+							<div class="product-price has-countdown">
+								<p>Price: @product.Price.ToString("N0") đ</p>
+							</div>
+
+							<div class="product-actions">
+								<div class="action-buys" style="">
+									<form method="post" action="https://localhost:7222/cart/"> 
+										<input hidden value="@if(cartId != null) @cartId" name="cartId"/>
+										<input hidden value="@product.Id" name="productId">
+										<input hidden value="1" name="quantity">
+										<button style="
+												   border-radius: 5px; display:flex; flex-direction:column; width:55%;
+												   border: none; justify-content:center; align-items:center;
+												   outline: none;
+												   background-color: red;
+												   padding: 10px 10px 14px;
+												   color: #fff;"
+												type="submit"
+												class="button btn-buynow" id="buy-now">
+											<span style="font-weight: 600;font-size: 18px;">THÊM VÀO GIỎ HÀNG</span>
+											@* <span style="font-weight: 400;font-size: 14px;margin-top: 3px;">Giao tận nơi hoặc nhận tại cửa hàng</span> *@
+										</button>
+									</form>
+								</div>
+							</div>
+							<div class="product-desc-short prtab2">
+								<p>@product.Description</p>
+							</div>
+						</div>
+                        }
+				</div>
+			</div>
+        </div>
+	</div>
+</div>
+
+<div class="container" style="height: 250px; margin-bottom: 100px; border:1px solid #ccc">
+	<h4 style="font-size: 24px; padding: 10px 10px; border-bottom:1px solid #ccc">
+		Viewed products
+	</h4>
+	<div class="row">
+	</div>
+</div>
+
+<footer class="main-footer container">
+	<div class="main-footer--top">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-sm-12 col-md-6 col-lg-2 col-lg">
+					<div class="footer-col footer-link toggle-footer toggle-first">
+						<div class="footer-title">
+							<h4>Về chúng tôi</h4>
+							<span class="icon-title"></span>
+						</div>
+						<div class="footer-content">
+							<ul>
+								<li class="item"><a href="#" title="Giới thiệu">Giới thiệu</a></li>
+								<li class="item"><a href="#" title="Tuyển dụng">Tuyển dụng</a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-12 col-md-6 col-lg-2 col-lg">
+					<div class="footer-col footer-link toggle-footer">
+						<div class="footer-title">
+							<h4>Chính sách </h4>
+							<span class="icon-title"></span>
+						</div>
+						<div class="footer-content">
+							<ul>
+								<li class="item"><a href="#" title="Chính sách bảo hành">Chính sách bảo hành</a></li>
+								<li class="item"><a href="#" title="Chính sách thanh toán">Chính sách thanh toán</a></li>
+								<li class="item"><a href="#" title="Chính sách giao hàng">Chính sách giao hàng</a></li>
+								<li class="item"><a href="#" title="Chính sách bảo mật">Chính sách bảo mật</a></li>
+
+							</ul>
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-12 col-md-6 col-lg-2 col-lg">
+					<div class="footer-col footer-link toggle-footer">
+						<div class="footer-title">
+							<h4>Thông tin </h4>
+							<span class="icon-title"></span>
+						</div>
+						<div class="footer-content">
+							<ul>
+								<li class="item"><a href="" title="Hệ thống cửa hàng">Hệ thống cửa hàng</a></li>
+								<li class="item"><a href="" title="Trung tâm bảo hành">Trung tâm bảo hành</a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-12 col-md-6 col-lg-3 col-lg">
+					<div class="footer-col footer-block toggle-footer">
+						<div class="footer-title"><h4>TỔNG ĐÀI HỖ TRỢ <span>(Miễn phí gọi)</span></h4></div>
+						<div class="footer-content">
+							<div class="list-info">
+								<p><span>Gọi mua: </span> <a href="tel:0813041374">0813041374 <span> (8:00 - 21:00) </span> </a></p>
+								<p><span>CSKH: </span> <a href="tel:0813041374">0813041374<span> (8:00 - 21:00) </span> </a></p>
+								<p><span>Email: </span> <a href="#">nguyenphong22803@gmail.com</a></p>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-12 col-md-6 col-lg-3 col-lg">
+					<div class="footer-col footer-block toggle-footer">
+						<div class="footer-title"><h4>Đơn vị vận chuyển</h4></div>
+						<div class="footer-content">
+							<ul class="list-ship">
+								<li><img data-sizes="auto" class="lazyautosizes lazyloaded" src="//theme.hstatic.net/200000722513/1001090675/14/ship_1.png?v=1782" data-src="//theme.hstatic.net/200000722513/1001090675/14/ship_1.png?v=1782" alt="Hình thức vận chuyển 1" sizes="106px"></li>
+								<li><img data-sizes="auto" class="lazyautosizes lazyloaded" src="//theme.hstatic.net/200000722513/1001090675/14/ship_2.png?v=1782" data-src="//theme.hstatic.net/200000722513/1001090675/14/ship_2.png?v=1782" alt="Hình thức vận chuyển 2" sizes="106px"></li>
+								<li><img data-sizes="auto" class="lazyautosizes lazyloaded" src="//theme.hstatic.net/200000722513/1001090675/14/ship_3.png?v=1782" data-src="//theme.hstatic.net/200000722513/1001090675/14/ship_3.png?v=1782" alt="Hình thức vận chuyển 3" sizes="106px"></li>
+								<li><img data-sizes="auto" class="lazyautosizes lazyloaded" src="//theme.hstatic.net/200000722513/1001090675/14/ship_4.png?v=1782" data-src="//theme.hstatic.net/200000722513/1001090675/14/ship_4.png?v=1782" alt="Hình thức vận chuyển 4" sizes="106px"></li>
+							</ul>
+						</div>
+					</div>
+					<div class="footer-col footer-block toggle-footer">
+						<div class="footer-title"><h4>Cách thức thanh toán</h4></div>
+						<div class="footer-content">
+							<ul class="list-pay">
+								<li><img data-sizes="auto" class="lazyautosizes lazyloaded" src="//theme.hstatic.net/200000722513/1001090675/14/pay_1.png?v=1782" data-src="//theme.hstatic.net/200000722513/1001090675/14/pay_1.png?v=1782" alt="Phương thức thanh toán 1" sizes="106px"></li>
+								<li><img data-sizes="auto" class="lazyautosizes lazyloaded" src="//theme.hstatic.net/200000722513/1001090675/14/pay_2.png?v=1782" data-src="//theme.hstatic.net/200000722513/1001090675/14/pay_2.png?v=1782" alt="Phương thức thanh toán 2" sizes="106px"></li>
+								<li><img data-sizes="auto" class="lazyautosizes lazyloaded" src="//theme.hstatic.net/200000722513/1001090675/14/pay_3.png?v=1782" data-src="//theme.hstatic.net/200000722513/1001090675/14/pay_3.png?v=1782" alt="Phương thức thanh toán 3" sizes="106px"></li>
+								<li><img data-sizes="auto" class="lazyautosizes lazyloaded" src="//theme.hstatic.net/200000722513/1001090675/14/pay_4.png?v=1782" data-src="//theme.hstatic.net/200000722513/1001090675/14/pay_4.png?v=1782" alt="Phương thức thanh toán 4" sizes="106px"></li>
+								<li><img data-sizes="auto" class="lazyautosizes lazyloaded" src="//theme.hstatic.net/200000722513/1001090675/14/pay_5.png?v=1782" data-src="//theme.hstatic.net/200000722513/1001090675/14/pay_5.png?v=1782" alt="Phương thức thanh toán 5" sizes="106px"></li>
+								<li><img data-sizes="auto" class="lazyautosizes lazyloaded" src="//theme.hstatic.net/200000722513/1001090675/14/pay_6.png?v=1782" data-src="//theme.hstatic.net/200000722513/1001090675/14/pay_6.png?v=1782" alt="Phương thức thanh toán 6" sizes="106px"></li>
+								<li><img data-sizes="auto" class="lazyautosizes lazyloaded" src="//theme.hstatic.net/200000722513/1001090675/14/pay_7.png?v=1782" data-src="//theme.hstatic.net/200000722513/1001090675/14/pay_7.png?v=1782" alt="Phương thức thanh toán 7" sizes="106px"></li>
+								<li><img data-sizes="auto" class="lazyautosizes lazyloaded" src="//theme.hstatic.net/200000722513/1001090675/14/pay_8.png?v=1782" data-src="//theme.hstatic.net/200000722513/1001090675/14/pay_8.png?v=1782" alt="Phương thức thanh toán 8" sizes="106px"></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</footer>
+
+

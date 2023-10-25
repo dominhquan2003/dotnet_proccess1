@@ -1,0 +1,49 @@
+﻿@{
+    Layout = "~/Views/Shared/_Order_Layout/_Order_Layout.cshtml";   
+}
+<section>
+    <table>
+        <thead>
+            <tr>
+                <td>STT</td>
+                <td>Name</td>
+                <td>Descrtion</td>
+                <td>Price</td>
+                <td>Quantity</td>
+                <td>Total Amount</td>
+            </tr>
+        </thead>
+        <tbody>
+
+        </tbody>
+        <form action="/order/payment" method="post">
+            @{
+                if(ViewBag.Carts != null)
+                {
+                    var carts = ViewBag.Carts;
+                    var index = 0;
+                    foreach (var cart in carts)
+                    {
+                    <tr>
+                        <td>@(index + 1)</td>
+                        <td>
+                            <label for="Name1">Product Name:</label>
+                            <input type="hidden" id="Name@(index)" name="products[@index].Name" value="@cart.Product.Name" required>
+                        </td>
+                        <td>
+                            <label for="Name1">Product Descsription:</label>
+                            <input type="text" id="Name1" name="products[0].Name" required>
+                        </td>
+                        <td>
+                            <label>Price: @cart.Product.Price.ToString("N0")</label>
+                            <input type="hidden" id="Price1" name="products[0].Price" required>
+                        </td>
+                    </tr>
+                    }
+                }
+            }
+            <button type="submit">Create Order</button>
+        </form>
+    </table>
+    
+</section>

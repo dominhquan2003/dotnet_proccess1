@@ -1,0 +1,54 @@
+﻿@{
+    Layout = "~/Views/Shared/_Admin_Layout/_Admin_Layout.cshtml";
+    ViewData["Title"] = "Products Page";
+}
+<div class="container-fluid pt-4 px-4">
+    <div class="bg-secondary text-center rounded p-4">
+            <div class="mb-3">
+                <h4>List products</h4>
+            </div>
+            <table class="table text-start align-middle table-bordered table-hover mb-0">
+                <thead>
+                    <tr class="text-white text-center">
+                        <th scope="col"><input class="form-check-input" type="checkbox"></th>
+                        <th scope="col">STT</th>
+                        <th scope="col">Product Name</th>
+                        <th scope="col">Product Description</th>
+                        <th scope="col">Product Price</th>
+                        <th scope="col">Stock Quantity</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                @{
+                    if(ViewBag.Products != null)
+                    {
+                        var index = 1;
+                        foreach (var p in ViewBag.Products)
+                        {
+                            <tr>
+                                <td><input class="form-check-input" type="checkbox"></td>
+                                <td>
+                                    <a href="/Product/@p.Id">
+                                        @index  
+                                    </a>
+                                </td>
+                                <td>@p.Name</td>
+                                <td>@p.Description</td>
+                                <td>@p.Price.ToString("N0")đ</td>
+                                <td>@p.StockQuantity</td>
+                                <td>    
+                                    <a style="width:100%; margin-bottom: 5px" class="btn btn-sm btn-success" href="/Admin/product/edit/@p.Id">Edit</a>
+                                    <a style="width:100%; margin-bottom: 5px" class="btn btn-sm btn-info" href="/Admin/product/delete/@p.Id">Delete</a>
+                                </td>
+                            </tr>
+                            index++;
+                        }
+                    }
+                }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+  
